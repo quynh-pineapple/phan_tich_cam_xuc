@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phân tích cảm xúc bình luận tiếng Việt</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<div class="acct" id="acct"></div>
+<h1>Phân tích cảm xúc bình luận mạng xã hội</h1>
+<p class="sub">Dán một bình luận tiếng Việt để xem hệ thống chấm điểm cảm xúc và chỉ ra từ nào đóng góp vào kết quả. Hiểu được phủ định, từ nhấn mạnh, từ lóng, emoji và cả bình luận không dấu.</p>
+
+<section class="card">
+<textarea id="in" aria-label="Bình luận cần phân tích">Áo đẹp nhưng giao hàng hơi chậm. Shop nhiệt tình lắm 👍</textarea>
+<div class="row"><button class="primary" id="go">Phân tích</button><button id="clr">Xóa</button></div>
+<div id="out" class="out"></div>
+</section>
+
+<section class="card">
+<h2>Bình luận mẫu</h2>
+<div class="bars" id="bars"></div>
+<div id="list"></div>
+<p class="note">Bấm vào một bình luận để xem chi tiết ở phía trên.</p>
+</section>
+
+<section class="card">
+<h2>Phân tích hàng loạt</h2>
+<p class="note flush">Mỗi dòng là một bình luận. Dán dữ liệu của bạn vào để xem tổng quan theo từng khía cạnh.</p>
+<textarea id="bt" class="tall" aria-label="Danh sách bình luận"></textarea>
+<div class="row"><button class="primary" id="bgo">Phân tích tất cả</button><button id="bcp">Sao chép CSV</button><span class="sm" id="bcm"></span></div>
+<div id="bsum" class="bsum"></div>
+<div class="bars" id="bag"></div>
+<div id="btb"></div>
+<details><summary class="sm">Xem CSV</summary><textarea id="bcsv" class="csv" readonly></textarea></details>
+</section>
+
+<section class="card">
+<h2>Dạy hệ thống từ mới</h2>
+<div class="row flush"><input id="lw" placeholder="Ví dụ: chuẩn chỉnh" aria-label="Từ mới"><select id="lv" aria-label="Mức cảm xúc"><option value="3">Rất tích cực (+3)</option><option value="2" selected>Tích cực (+2)</option><option value="-2">Tiêu cực (-2)</option><option value="-3">Rất tiêu cực (-3)</option></select><button id="lx">Thêm từ</button></div>
+<p class="note" id="lm">Từ mới chỉ có hiệu lực trong phiên hiện tại.</p>
+<div id="mine"></div>
+</section>
+
+<section class="card">
+<h2>Từ điển từ lóng &amp; trend <span class="sm" id="sc"></span></h2>
+<input id="sq" placeholder="Tìm từ lóng, ví dụ: xỉu" aria-label="Tìm từ lóng">
+<div class="chips" id="sl"></div>
+<p class="note">Cập nhật 10/2026. Xanh: nghĩa tích cực · Đỏ: nghĩa tiêu cực. Có thể gõ không dấu.</p>
+</section>
+
+<section class="card">
+<h2>Luật ngữ cảnh</h2>
+<p class="note flush">Từ nhiều nghĩa được chấm theo từ đứng gần nó trong cùng một vế câu. Ví dụ “cháy” đi với “áo” là khen, đi với “đồ ăn” là chê.</p>
+<div id="cl"></div>
+</section>
+
+<dialog id="dlg">
+<h2 id="dtitle">Đăng nhập</h2>
+<div class="fld"><input id="un" placeholder="Tên đăng nhập" autocomplete="username" aria-label="Tên đăng nhập"></div>
+<div class="fld"><input id="pw" type="password" placeholder="Mật khẩu" autocomplete="current-password" aria-label="Mật khẩu"></div>
+<p class="note" id="derr" role="alert"></p>
+<div class="row"><button class="primary" id="dok">Đăng nhập</button><button id="dcancel">Hủy</button><button id="dsub" class="link"></button></div>
+<p class="note">Tài khoản, từ điển riêng và các bình luận bạn phân tích khi đã đăng nhập được lưu trên máy chủ của trang này. Không nhập thông tin nhạy cảm.</p>
+</dialog>
+<script src="script.js" defer></script>
+<script src="account.js" defer></script>
+</body>
+</html>
