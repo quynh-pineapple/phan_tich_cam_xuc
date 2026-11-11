@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VSA · Phân tích cảm xúc bình luận mạng xã hội tiếng Việt</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="logo"><b>VSA</b><span>Vietnamese Sentiment Analysis</span></div>
+  <nav class="nav" id="nav">
+    <a href="#dashboard">📊 Dashboard</a>
+    <a href="#analyze">💬 Phân tích</a>
+    <a href="#batch">📥 Hàng loạt</a>
+    <a href="#dict">📚 Từ điển</a>
+    <a href="#rules">🧭 Luật ngữ cảnh</a>
+    <a href="#history">🕘 Lịch sử</a>
+    <a href="#review" id="navreview" hidden>✅ Duyệt đóng góp</a>
+    <a href="#account">👤 Tài khoản</a>
+  </nav>
+  <div class="me" id="acct"></div>
+</aside>
+<div class="content">
+  <header class="top"><h1 id="vt">Dashboard</h1><span class="sm" id="who"></span></header>
+  <main class="views">
+<div class="view" data-view="dashboard" hidden>
+<section class="card ov" id="ov" aria-label="Tổng quan"></section>
+<section class="card">
+<h2>Chào mừng đến VSA</h2>
+<p class="note flush">Dán một bình luận từ Facebook, YouTube, TikTok... để xem hệ thống chấm điểm cảm xúc và chỉ ra từ nào đóng góp vào kết quả. Hiểu được phủ định, từ nhấn mạnh, từ lóng Gen Z, emoji, @tag, hashtag và cả bình luận không dấu.</p>
+<div class="row"><a class="btn primary" href="#analyze">Phân tích một bình luận</a><a class="btn" href="#batch">Phân tích hàng loạt</a><a class="btn" href="#dict">Dạy từ mới</a></div>
+</section>
+</div>
+<div class="view" data-view="analyze" hidden>
+<section class="card">
+<textarea id="in" aria-label="Bình luận cần phân tích">Clip này hay nhưng đoạn cuối hơi dài dòng. Chị chủ kênh duyên quá 👍</textarea>
+<div class="row"><button class="primary" id="go">Phân tích</button><button id="clr">Xóa</button></div>
+<div id="out" class="out"></div>
+</section>
+<section class="card">
+<h2>Bình luận mẫu</h2>
+<div class="bars" id="bars"></div>
+<div id="list"></div>
+<p class="note">Bấm vào một bình luận để xem chi tiết ở phía trên.</p>
+</section>
+</div>
+<div class="view" data-view="batch" hidden>
+<section class="card">
+<h2>Phân tích hàng loạt</h2>
+<p class="note flush">Mỗi dòng là một bình luận (copy từ phần bình luận dưới video, bài đăng...). Hệ thống tổng hợp theo từng khía cạnh: nội dung, nhân vật, hình thức và cộng đồng.</p>
+<textarea id="bt" class="tall" aria-label="Danh sách bình luận"></textarea>
+<div class="row"><button class="primary" id="bgo">Phân tích tất cả</button><button id="bup">Tải tệp lên</button><button id="bcp">Sao chép CSV</button><button id="bdl">Tải CSV về</button><span class="sm" id="bcm"></span></div>
+<input type="file" id="bfile" accept=".csv,.txt,text/csv,text/plain" hidden aria-label="Chọn tệp CSV hoặc TXT">
+<p class="note">Tệp .csv (cột <code>binh_luan</code> hoặc cột đầu tiên) hoặc .txt (mỗi dòng một bình luận), tối đa 2000 dòng.</p>
+<div id="bsum" class="bsum"></div>
+<div class="bars" id="bag"></div>
+<div id="btb"></div>
+<details><summary class="sm">Xem CSV</summary><textarea id="bcsv" class="csv" readonly></textarea></details>
+</section>
+</div>
+<div class="view" data-view="dict" hidden>
+<section class="card">
+<h2>Dạy hệ thống từ mới</h2>
+<div class="row flush"><input id="lw" placeholder="Ví dụ: cháy phố, thả tim" aria-label="Từ mới"><select id="lv" aria-label="Mức cảm xúc"><option value="3">Rất tích cực (+3)</option><option value="2" selected>Tích cực (+2)</option><option value="-2">Tiêu cực (-2)</option><option value="-3">Rất tiêu cực (-3)</option></select><button id="lx">Thêm từ</button></div>
+<label class="chk"><input type="checkbox" id="lsug"> Đề xuất từ này cho từ điển chung (quản trị sẽ duyệt)</label>
+<p class="note" id="lm">Từ mới chỉ có hiệu lực trong phiên hiện tại.</p>
+<div id="mine"></div>
+</section>
+<section class="card">
+<h2>Từ điển từ lóng &amp; trend <span class="sm" id="sc"></span></h2>
+<input id="sq" placeholder="Tìm từ lóng, ví dụ: slay" aria-label="Tìm từ lóng">
+<div class="chips" id="sl"></div>
+<p class="note">Từ lóng và trend thường gặp trong bình luận mạng xã hội, cập nhật 10/2026. Xanh: nghĩa tích cực · Đỏ: nghĩa tiêu cực. Có thể gõ không dấu.</p>
+</section>
+</div>
+<div class="view" data-view="rules" hidden>
+<section class="card">
+<h2>Luật ngữ cảnh</h2>
+<p class="note flush">Từ nhiều nghĩa được chấm theo từ đứng gần nó trong cùng một vế câu. Ví dụ “cháy” đi với “sân khấu” là khen (diễn rất cuốn), đi với “nhà” là tin buồn.</p>
+<div id="cl"></div>
+</section>
+</div>
+<div class="view" data-view="history" hidden>
+<section class="card">
+<h2>Lịch sử phân tích <span class="sm" id="hc"></span></h2>
+<div id="hl"></div>
+<div class="row"><button id="hclr" hidden>Xóa toàn bộ lịch sử</button></div>
+</section>
+</div>
+<div class="view" data-view="review" hidden>
+<section class="card">
+<h2>Phản hồi từ người dùng <span class="sm" id="rfc"></span></h2>
+<p class="note flush">Người dùng báo kết quả sai và nêu nhãn đúng. Duyệt những phản hồi bạn thấy đúng, rồi tải CSV để thử lại bằng <code>eval.js</code> hoặc huấn luyện.</p>
+<div class="row"><a class="btn" href="/api/admin/feedback.csv">Tải CSV phản hồi đã duyệt</a></div>
+<div id="rfl"></div>
+</section>
+<section class="card">
+<h2>Từ người dùng đề xuất <span class="sm" id="rsc"></span></h2>
+<div id="rsl"></div>
+</section>
+<section class="card">
+<h2>Nhật ký thay đổi từ điển chung <span class="sm" id="rlc"></span></h2>
+<p class="note flush">Mọi lần thêm, sửa, xóa từ hoặc luật ngữ cảnh đều được ghi lại. Bấm “Hoàn tác” để khôi phục giá trị trước đó.</p>
+<div id="rll"></div>
+</section>
+</div>
+<div class="view" data-view="account" hidden>
+<section class="card">
+<h2>Đổi mật khẩu</h2>
+<div id="pwbox">
+<div class="row"><input id="pwo" type="password" autocomplete="current-password" placeholder="Mật khẩu hiện tại" aria-label="Mật khẩu hiện tại"></div>
+<div class="row"><input id="pwn" type="password" autocomplete="new-password" placeholder="Mật khẩu mới (tối thiểu 6 ký tự)" aria-label="Mật khẩu mới"><input id="pwn2" type="password" autocomplete="new-password" placeholder="Nhập lại mật khẩu mới" aria-label="Nhập lại mật khẩu mới"></div>
+<div class="row"><button class="primary" id="pwgo">Đổi mật khẩu</button><span class="sm" id="pwm"></span></div>
+<p class="note">Đổi xong, các thiết bị khác sẽ bị đăng xuất.</p>
+</div>
+<p class="note" id="pwlogin" hidden><a href="login.html">Đăng nhập</a> để đổi mật khẩu.</p>
+</section>
+</div>
+  </main>
+</div>
+</div>
+<script src="script.js" defer></script>
+<script src="account.js" defer></script>
+<script src="nav.js" defer></script>
+</body>
+</html>

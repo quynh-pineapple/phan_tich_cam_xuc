@@ -1,0 +1,20 @@
+{
+  "name": "phan-tich-cam-xuc",
+  "version": "1.2.1",
+  "description": "Phân tích cảm xúc bình luận mạng xã hội tiếng Việt",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "eval": "node eval.js",
+    "eval:indep": "node eval.js test_independent.csv --test=1 --errors",
+    "eval:sarcasm": "node eval.js test_sarcasm.csv --test=1 --errors",
+    "eval:holdout": "node eval.js test_holdout.csv --test=1 --errors",
+    "test": "node --test test.js",
+    "train": "node train_nb.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

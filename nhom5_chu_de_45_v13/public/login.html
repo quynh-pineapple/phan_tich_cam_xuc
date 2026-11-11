@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Đăng nhập · VSA</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="login">
+<aside class="brand">
+  <div class="logo2">💬 <b>VSA</b></div>
+  <h2>Biết người xem đang cảm thấy gì, ngay khi họ bình luận.</h2>
+  <p>Hệ thống đọc bình luận tiếng Việt trên mạng xã hội, chấm điểm cảm xúc và chỉ ra từ nào đóng góp vào kết quả.</p>
+  <div class="moods"><span>😍</span><span>🙂</span><span>😐</span><span>😠</span></div>
+  <ul class="feats">
+    <li>📥 Phân tích hàng loạt, xuất kết quả CSV</li>
+    <li>🧠 Hiểu phủ định, nhấn mạnh, emoji và từ lóng Gen Z</li>
+    <li>📚 Từ điển riêng và luật ngữ cảnh</li>
+  </ul>
+</aside>
+<section class="pane"><div class="pane-in">
+  <h1 id="ttl">Chào mừng trở lại</h1>
+  <p class="sub" id="tsub">Đăng nhập để tiếp tục phân tích.</p>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tlogin" aria-selected="true">Đăng nhập</button>
+    <button role="tab" id="treg" aria-selected="false">Tạo tài khoản</button>
+  </div>
+  <form id="f" novalidate>
+    <label class="fld" for="un">Tên đăng nhập
+      <input id="un" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="vd: minh_anh">
+      <small class="sm" id="uhint" hidden>3–20 ký tự: chữ không dấu, số, _ hoặc .</small>
+    </label>
+    <label class="fld" for="pw">Mật khẩu
+      <span class="pwbox">
+        <input id="pw" type="password" autocomplete="current-password" placeholder="Ít nhất 6 ký tự">
+        <button type="button" id="eye" class="eye" aria-label="Hiện mật khẩu">Hiện</button>
+      </span>
+      <span class="meter" id="meter" hidden><i></i></span>
+    </label>
+    <label class="fld" for="pw2" id="pw2box" hidden>Nhập lại mật khẩu
+      <input id="pw2" type="password" autocomplete="new-password" placeholder="Nhập lại mật khẩu">
+    </label>
+    <label class="chk"><input type="checkbox" id="rm" checked> Ghi nhớ đăng nhập trên thiết bị này</label>
+    <p class="err" id="err" role="alert"></p>
+    <button class="primary wide" id="ok" type="submit">Đăng nhập</button>
+  </form>
+  <p class="or">hoặc</p>
+  <a class="btn wide" href="index.html">Dùng thử, không cần tài khoản</a>
+  <p class="note">Tài khoản và dữ liệu phân tích được lưu trên máy chủ của trang này. Không nhập thông tin nhạy cảm.</p>
+</div></section>
+</main>
+<script src="auth.js"></script>
+</body>
+</html>

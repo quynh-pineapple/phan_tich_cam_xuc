@@ -1,0 +1,77 @@
+##### 1. data.csv, tập kiểm tra 20% (mô hình chỉ học phần train)
+=== TẬP KIỂM TRA (n = 46) ===
+Accuracy (câu bỏ qua tính là sai):  95.7%   Macro-F1:  97.6%
+Hệ thống trả lời 44/46 câu ( 95.7%); accuracy trên các câu đã trả lời: 100.0%
+Trong 2 câu "Chưa đủ thông tin": 2 thật ra trung tính, 0 tích cực, 0 tiêu cực (0 câu có cảm xúc mà hệ thống bỏ lỡ nhưng đã được gắn cờ thay vì kết luận sai).
+Chấm SAI nhưng độ tin cậy cao (>= 0.7): 0 câu
+
+Lớp          Precision  Recall    F1    Số mẫu
+Tích cực     100.0%   100.0%  100.0%   16
+Trung tính   100.0%    86.7%   92.9%   15
+Tiêu cực     100.0%   100.0%  100.0%   15
+
+Ma trận nhầm lẫn (hàng = nhãn thật, cột = dự đoán):
+                       Tích cực        Trung tính          Tiêu cực Chưa đủ thông tin
+Tích cực                     16                 0                 0                 0
+Trung tính                    0                13                 0                 2
+Tiêu cực                      0                 0                15                 0
+
+##### 2. Bộ độc lập test_independent.csv, 72 câu (mô hình học từ data.csv)
+=== TOÀN BỘ DỮ LIỆU (tham khảo) (n = 72) ===
+Accuracy (câu bỏ qua tính là sai):  83.3%   Macro-F1:  86.1%
+Hệ thống trả lời 67/72 câu ( 93.1%); accuracy trên các câu đã trả lời:  89.6%
+Trong 5 câu "Chưa đủ thông tin": 3 thật ra trung tính, 1 tích cực, 1 tiêu cực (2 câu có cảm xúc mà hệ thống bỏ lỡ nhưng đã được gắn cờ thay vì kết luận sai).
+Chấm SAI nhưng độ tin cậy cao (>= 0.7): 3 câu (thường là mỉa mai hoặc từ "hay" nghĩa là "hoặc")
+
+Lớp          Precision  Recall    F1    Số mẫu
+Tích cực      82.8%    96.0%   88.9%   25
+Trung tính    89.5%    77.3%   82.9%   22
+Tiêu cực     100.0%    76.0%   86.4%   25
+
+Ma trận nhầm lẫn (hàng = nhãn thật, cột = dự đoán):
+                       Tích cực        Trung tính          Tiêu cực Chưa đủ thông tin
+Tích cực                     24                 0                 0                 1
+Trung tính                    2                17                 0                 3
+Tiêu cực                      3                 2                19                 1
+
+--- Các câu chấm sai trên toàn bộ dữ liệu ---
+[Tích cực -> Chưa đủ thông tin, từ điển, tin cậy 0] Anh nói đúng quá, mình cũng nghĩ y chang vậy
+[Tiêu cực -> Tích cực, mô hình, tin cậy 0.53] Giao hàng chậm hơn một tuần, liên hệ shop thì bơ luôn
+[Tiêu cực -> Trung tính, từ điển, tin cậy 0.6] Đồ ăn nguội ngắt, giá thì chát, không bao giờ quay lại
+[Tiêu cực -> Trung tính, từ điển, tin cậy 0.4] Mua phải hàng kém chất lượng, tiếc tiền ghê
+[Trung tính -> Chưa đủ thông tin, từ điển, tin cậy 0] Đã nhận được hàng, đóng gói bình thường
+[Trung tính -> Tích cực, từ điển, tin cậy 0.79] Phim này chiếu rạp hay phát trên mạng vậy mọi người?
+[Trung tính -> Chưa đủ thông tin, từ điển, tin cậy 0] Bình luận đầu tiên nè
+[Tiêu cực -> Tích cực, từ điển, tin cậy 0.85] Hay thật đấy, đợi cả tháng mới giao, quá nhanh luôn
+[Tiêu cực -> Chưa đủ thông tin, từ điển, tin cậy 0] Xem xong chỉ muốn đập điện thoại
+[Trung tính -> Chưa đủ thông tin, từ điển, tin cậy 0] Cũng bình thường, không có gì đặc biệt
+[Trung tính -> Tích cực, từ điển, tin cậy 0.55] Dùng tạm được, không tốt cũng không tệ
+[Tiêu cực -> Tích cực, từ điển, tin cậy 0.79] Cứ tưởng hay, ai ngờ nhìn như đồ bỏ đi
+
+##### 3. So sánh: bộ độc lập, chỉ từ điển
+=== TOÀN BỘ DỮ LIỆU (tham khảo) (n = 72) ===
+Accuracy (câu bỏ qua tính là sai):  69.4%   Macro-F1:  76.7%
+Hệ thống trả lời 56/72 câu ( 77.8%); accuracy trên các câu đã trả lời:  89.3%
+
+
+##### Cập nhật sau mục 8 (mỉa mai, "hay" = "hoặc", từ điển bổ sung)
+Bộ độc lập 72 câu: Accuracy 88,9% (trước: 83,3%), Macro-F1 91,1% (trước: 86,1%); chỉ từ điển: 75,0% (trước: 69,4%).
+Hệ thống trả lời 68/72 câu; accuracy trên câu đã trả lời 94,1%; không còn câu sai nào có độ tin cậy >= 0,7.
+data.csv (20% kiểm tra): không đổi, 95,7% / 97,6%.
+Lưu ý: các luật mới sửa đúng những câu sai đã biết trong bộ độc lập, nên 88,9% hơi lạc quan (xem CAP_NHAT.md mục 8).
+
+
+##### Cập nhật v11: mở rộng nhận diện mỉa mai (so sánh trước/sau, cùng cách đo --test=1)
+Bộ                                  n    Trước    Sau     Ghi chú
+test_independent.csv (72 câu)      72    88,9%    91,7%   bộ cũ, không dùng để chỉnh luật mới
+test_sarcasm.csv (40 câu mỉa mai)  40    47,5%    95,0%   LƯU Ý: bộ này được dùng để chỉnh luật, nên số "sau" cao hơn thực tế
+test_holdout.csv (27 câu)          27    66,7%    81,5%   viết SAU khi chỉnh luật, từ vựng khác -> số đáng tin hơn
+data.csv (20% kiểm tra, n = 53)          95,7%    92,5%   data.csv được thêm 34 câu khó (mỉa mai) nên tập kiểm tra khó hơn và khác tập cũ
+Chỉ từ điển (--no-model): independent 75,0%, sarcasm 87,5%, holdout 70,4%.
+
+Thử cho Naive Bayes can thiệp khi từ điển có tín hiệu nhưng yếu (độ tin cậy Thấp), đổi nhãn nếu mô hình chắc >= P:
+P = 0,7 / 0,8 / 0,9 / 0,95: kết quả không đổi trên cả 4 bộ (mô hình gần như không bao giờ đủ chắc);
+P = 0,6: bộ holdout giảm 81,5% -> 77,8%. Kết luận: không có lợi với ~260 câu huấn luyện, đã bỏ, giữ nguyên cách cũ (mô hình chỉ dùng khi từ điển không có tín hiệu).
+
+Hạn chế còn lại: các câu mỉa mai dùng từ khen chưa có trong từ điển (ví dụ "siêng", "sống động") vẫn bị bỏ sót;
+câu trần thuật trung tính ("Video dài 15 phút...") vẫn bị trả "Chưa đủ thông tin" theo thiết kế.
